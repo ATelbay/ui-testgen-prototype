@@ -1,0 +1,21 @@
+# settings_main.xml x32, 100 selectors, 20 rounds
+         2692042 function calls in 0.460 seconds
+
+   Ordered by: cumulative time
+   List reduced from 33 to 12 due to restriction <12>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.008    0.008    0.498    0.498 profile_validator.py:22(step)
+       20    0.078    0.004    0.375    0.019 snapshot.py:56(parse_hierarchy)
+       20    0.000    0.000    0.146    0.007 ElementTree.py:1334(XML)
+       20    0.146    0.007    0.146    0.007 {method 'feed' of 'xml.etree.ElementTree.XMLParser' objects}
+     2000    0.001    0.000    0.086    0.000 validator.py:109(validate)
+     1600    0.017    0.000    0.081    0.000 validator.py:118(<listcomp>)
+    48640    0.027    0.000    0.066    0.000 snapshot.py:43(parse_bounds)
+   201520    0.022    0.000    0.064    0.000 validator.py:68(_matches)
+   201520    0.017    0.000    0.042    0.000 {built-in method builtins.all}
+       20    0.020    0.001    0.029    0.001 validator.py:100(__init__)
+   403440    0.016    0.000    0.025    0.000 validator.py:69(<genexpr>)
+   243200    0.019    0.000    0.019    0.000 snapshot.py:48(<genexpr>)
+
+

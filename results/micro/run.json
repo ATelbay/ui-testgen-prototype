@@ -1,0 +1,36 @@
+{
+  "config": {
+    "snapshots": "data/snapshots",
+    "scales": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "queries": 100,
+    "repeats": 20,
+    "warmup": 3,
+    "process_runs": 5,
+    "seed": 42,
+    "output": "results/micro",
+    "quick": false
+  },
+  "equivalence_checked": 4800,
+  "outcomes_scale_1": {
+    "found": 478,
+    "absent": 160,
+    "ambiguous": 162
+  },
+  "environment": {
+    "python": "3.9.6",
+    "implementation": "CPython",
+    "os": "macOS-26.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "cpu": "Apple M4 Pro",
+    "logical_cpus": 12,
+    "git_commit": "c534c2e1e11fe29ff2aa4e6f10ee23438cdbde2d",
+    "git_dirty": false
+  }
+}
