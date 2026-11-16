@@ -1,0 +1,10 @@
+{
+  "ro.product.model": "sdk_gphone16k_arm64",
+  "ro.build.version.release": "17",
+  "ro.build.version.sdk": "37",
+  "ro.product.cpu.abi": "arm64-v8a",
+  "uiautomator_dump": "adb shell uiautomator dump /sdcard/window_dump.xml",
+  "repeats": 10,
+  "settle_seconds": 5.0,
+  "captured_at_utc": "2026-11-16T14:15:48Z"
+}

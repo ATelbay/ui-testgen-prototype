@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<hierarchy rotation="0">
+  <node index="0" text="" resource-id="" class="android.widget.FrameLayout" package="org.example.demo" content-desc="" clickable="false" enabled="true" bounds="[0,0][1080,2400]">
+    <node index="0" text="Sign in" resource-id="org.example.demo:id/title" class="android.widget.TextView" package="org.example.demo" content-desc="" clickable="false" enabled="true" bounds="[48,120][1032,220]" />
+    <node index="1" text="" resource-id="org.example.demo:id/email" class="android.widget.EditText" package="org.example.demo" content-desc="Email" clickable="true" enabled="true" bounds="[48,300][1032,420]" />
+    <node index="2" text="" resource-id="org.example.demo:id/password" class="android.widget.EditText" package="org.example.demo" content-desc="Password" clickable="true" enabled="true" bounds="[48,460][1032,580]" />
+    <node index="3" text="Sign in" resource-id="org.example.demo:id/submit" class="android.widget.Button" package="org.example.demo" content-desc="" clickable="true" enabled="false" bounds="[48,640][1032,760]" />
+    <node index="4" text="Help" resource-id="" class="android.widget.TextView" package="org.example.demo" content-desc="" clickable="true" enabled="true" bounds="[48,800][48,900]" />
+  </node>
+</hierarchy>

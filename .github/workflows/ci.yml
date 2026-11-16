@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.9 matches the local research environment, 3.12 a current release.
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Show environment
+        run: python --version && uname -a
+
+      - name: Byte-compile sources
+        run: python -m compileall -q src benchmarks tests
+
+      - name: Unit, regression and smoke tests
+        run: python -m unittest discover -s tests -t . -v
+
+      - name: Benchmark smoke run (timings are informational only)
+        run: python benchmarks/bench_validator.py --quick --output results/ci-smoke
+
+      - name: Upload smoke-run results
+        uses: actions/upload-artifact@v4
+        with:
+          name: bench-smoke-py${{ matrix.python-version }}
+          path: results/ci-smoke/
+          retention-days: 14

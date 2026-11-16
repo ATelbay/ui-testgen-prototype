@@ -1,0 +1,2 @@
+# The prototype, tests and benchmarks use only the Python standard library.
+# Supported interpreters: CPython 3.9+ (tested locally on 3.9.6, in CI on 3.9 and 3.12).
