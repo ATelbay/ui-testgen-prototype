@@ -4,6 +4,8 @@
 и динамического анализа интерфейса. Магистерский проект CSE7942 Research
 Project, автор — Тельбай Арыстан (7M06101 Software Engineering).
 
+[![CI](https://github.com/ATelbay/ui-testgen-prototype/actions/workflows/ci.yml/badge.svg)](https://github.com/ATelbay/ui-testgen-prototype/actions/workflows/ci.yml)
+
 ## Состояние
 
 Реализован первый модуль будущего фреймворка — проверка локаторов
@@ -27,7 +29,7 @@ benchmarks/           снятие дампов (adb), микробенчмар�
 data/snapshots/       8 реальных дампов экранов Settings (Android 17, эмулятор)
 results/              результаты экспериментов практики 8
 docs/                 план бенчмаркинга
-scripts/reproduce.sh  повтор проверок и эксперимента одной командой
+scripts/reproduce.sh  повтор проверок и измерений
 .github/workflows/    конфигурация CI (GitHub Actions)
 ```
 
@@ -62,16 +64,19 @@ scripts/reproduce.sh
 
 Скрипт запускает тесты, микробенчмарк (`results/micro/`) и профилирование
 (`results/profile/`). На Apple M4 Pro полный прогон занимает около 5 минут.
-Абсолютные времена зависят от процессора и интерпретатора. Воспроизводимыми
-считаются состав нагрузки, результаты проверки локаторов и соотношение реализаций,
-а не точные микросекунды.
+Состав нагрузки и результаты проверки локаторов при повторе совпадают.
+Абсолютные задержки и ускорение зависят от процессора и интерпретатора
+и оцениваются заново на каждом стенде.
 
-Повторное снятие дампов и задержки `uiautomator dump`:
+Повторное снятие дампов и задержки `uiautomator dump` выполняется отдельно.
+Эмулятор нужно остановить до микробенчмарка, как в практике 8:
 
 ```bash
 emulator -avd <AVD> -no-window -no-audio -no-snapshot -read-only &
 adb wait-for-device
-scripts/reproduce.sh --capture
+scripts/reproduce.sh --capture   # только дампы и results/macro
+adb emu kill
+scripts/reproduce.sh             # тесты и микробенчмарк без эмулятора
 ```
 
 Параметры, которые фиксируют воспроизводимость:
@@ -85,8 +90,10 @@ scripts/reproduce.sh --capture
 | Образ эмулятора | `system-images;android-37.1;google_apis_playstore_ps16k;arm64-v8a` | `results/macro/device.json` |
 
 Каждый запуск сохраняет конфигурацию, версию Python, ОС, процессор и commit
-Git в `results/micro/run.json`. Результаты фиксируются только с чистого
-рабочего дерева: значение `git_dirty` должно быть `false`.
+Git в `results/micro/run.json`. Поле `git_dirty` показывает, были ли
+незафиксированные изменения в `src/` и `benchmarks/`. Скрипт не запрещает
+измерения при `true`, поэтому такие результаты не следует фиксировать
+в репозитории.
 
 ## Тесты и CI
 
