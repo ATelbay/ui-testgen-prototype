@@ -27,7 +27,8 @@ src/uitestgen/        исходный код прототипа
 tests/                модульные, регрессионный и smoke-тесты (unittest)
 benchmarks/           снятие дампов (adb), микробенчмарк, профилирование
 data/snapshots/       8 реальных дампов экранов Settings (Android 17, эмулятор)
-results/              результаты экспериментов практики 8
+results/              результаты экспериментов практики 8 и их анализ (analysis/)
+analysis/             статистический анализ и рисунки (практика 10)
 docs/                 план бенчмаркинга
 scripts/reproduce.sh  повтор проверок и измерений
 .github/workflows/    конфигурация CI (GitHub Actions)
@@ -94,6 +95,23 @@ Git в `results/micro/run.json`. Поле `git_dirty` показывает, бы
 незафиксированные изменения в `src/` и `benchmarks/`. Скрипт не запрещает
 измерения при `true`, поэтому такие результаты не следует фиксировать
 в репозитории.
+
+## Анализ результатов (практика 10)
+
+Скрипт `analysis/analyze_results.py` заново анализирует сохранённые данные
+практики 8 (`results/macro`, `results/micro`) и записывает в
+`results/analysis/` статистики (`stats.json`, `validator_by_scale.csv`)
+и рисунки. Единица вывода — экран (n = 8): замеры сначала сводятся к медиане
+экрана. Доверительные интервалы получены бутстрэпом по экранам
+(10 000 выборок, seed 42) и t-интервалом на логарифмической шкале.
+Статистика использует только стандартную библиотеку; для рисунков нужен
+matplotlib (`analysis/requirements.txt`):
+
+```bash
+pip install -r analysis/requirements.txt
+python analysis/analyze_results.py               # статистики и рисунки
+python analysis/analyze_results.py --no-figures  # без matplotlib
+```
 
 ## Тесты и CI
 

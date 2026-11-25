@@ -1,0 +1,2 @@
+# Only for figures of analysis/analyze_results.py; statistics use the standard library.
+matplotlib==3.9.2
