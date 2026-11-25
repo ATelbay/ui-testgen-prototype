@@ -8,8 +8,10 @@ Reads only the committed raw data:
 * results/micro/run.json         - outcome counts and configuration.
 
 The independent unit for inference is the screen (n = 8): repeats and
-processes of one screen are not independent observations, so they are first
-collapsed to a per-screen median. Statistics use only the standard library;
+processes of one screen are not independent observations. The pooled dump
+median uses all 80 runs with a two-level (screen, then repeat) bootstrap CI;
+speedup, break-even q* and growth slopes start from per-screen medians.
+Statistics use only the standard library;
 figures need matplotlib (see analysis/requirements.txt) and are skipped with
 ``--no-figures``.
 
